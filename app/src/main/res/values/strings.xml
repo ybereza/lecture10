@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">L4 RecyclerView</string>
+    <string name="no_action_bar">L4 No Actionbar</string>
+    <string name="service_activity">L4 Service Activity</string>
+    <string name="webview_activity">L4 WebView</string>
+</resources>
