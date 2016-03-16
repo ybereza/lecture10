@@ -25,7 +25,7 @@ public class SimpleRecyclerAdapter extends RecyclerView.Adapter<SimpleViewHolder
 	public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		LayoutInflater inflater = mInflater.get();
 		if (inflater != null) {
-			return new SimpleViewHolder(inflater.inflate(R.layout.item_layout, parent, false));
+			return new SimpleViewHolder(inflater.inflate(R.layout.item_click_layout, parent, false));
 		}
 		else {
 			throw new RuntimeException("Oooops, looks like activity is dead");

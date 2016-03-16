@@ -4,9 +4,11 @@
  */
 package com.my.examples.lecture4;
 
+import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.ConfigurationInfo;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -30,7 +32,8 @@ public class ServiceActivity extends AppCompatActivity {
 		public void onServiceConnected(ComponentName name, IBinder service) {
 			mTestService = ITestService.Stub.asInterface(service);
 			try {
-				mTextView.setText(mTestService.getString());
+				mTestService.bindActivity(mServiceCallback);
+				mTestService.getStringAsync();
 				mServiceButton.setText("Connected");
 			}
 			catch (RemoteException e) {
@@ -44,6 +47,15 @@ public class ServiceActivity extends AppCompatActivity {
 
 		}
 	};
+
+	private class ServiceCallback extends ICallback.Stub {
+		@Override
+		public void onNewString(String data) throws RemoteException {
+			mTextView.setText(data);
+		}
+	}
+
+	private ServiceCallback mServiceCallback = new ServiceCallback();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

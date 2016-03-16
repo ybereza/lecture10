@@ -11,10 +11,32 @@ import android.os.RemoteException;
 
 public class TestService extends Service {
 	private class TestServiceProxy extends ITestService.Stub {
+		private ICallback mActivityCallbak;
 
 		@Override
 		public String getString() throws RemoteException {
 			return sayHello();
+		}
+
+		@Override
+		public void bindActivity(IBinder callback) throws RemoteException {
+			mActivityCallbak = ICallback.Stub.asInterface(callback);
+		}
+
+		@Override
+		public void getStringAsync() {
+			sendString("Async callback from service to activity");
+		}
+
+		public void sendString(String data) {
+			if (mActivityCallbak != null) {
+				try {
+					mActivityCallbak.onNewString(data);
+				}
+				catch (RemoteException e) {
+
+				}
+			}
 		}
 	}
 

@@ -7,7 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements ClickRecyclerAdapter.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements
+		ClickRecyclerAdapter.OnItemClickListener {
 	private RecyclerView mRecyclerView;
 
 	@Override
@@ -15,7 +16,7 @@ public class MainActivity extends AppCompatActivity implements ClickRecyclerAdap
 		super.onCreate(savedInstanceState);
 		mRecyclerView = new RecyclerView(this);
 
-		mRecyclerView.setAdapter(new SimpleRecyclerAdapter(getLayoutInflater()));
+		mRecyclerView.setAdapter(new ClickRecyclerAdapter(getLayoutInflater(), this));
 		mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 		mRecyclerView.setHasFixedSize(true);
