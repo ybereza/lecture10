@@ -4,11 +4,9 @@
  */
 package com.my.examples.lecture4;
 
-import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.pm.ConfigurationInfo;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -60,7 +58,7 @@ public class ServiceActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(com.my.examples.lecture4.R.layout.activity_main);
 
 		mTextView = (TextView)findViewById(R.id.textView);
  		mServiceButton = (Button)findViewById(R.id.connect);
