@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.os.RemoteException;
 
+import java.util.concurrent.TimeUnit;
+
 public class TestService extends Service {
 	private class TestServiceProxy extends ITestService.Stub {
 		private ICallback mActivityCallbak;
@@ -25,18 +27,27 @@ public class TestService extends Service {
 
 		@Override
 		public void getStringAsync() {
-			sendString("Async callback from service to activity");
+			sendString("Hello from Service!");
 		}
 
-		public void sendString(String data) {
-			if (mActivityCallbak != null) {
-				try {
-					mActivityCallbak.onNewString(data);
-				}
-				catch (RemoteException e) {
+		public void sendString(final String data) {
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					if (mActivityCallbak != null) {
+						try {
+							Thread.sleep(TimeUnit.SECONDS.toMillis(1));
+							mActivityCallbak.onNewString(data);
+						}
+						catch (InterruptedException e) {
 
+						}
+						catch (RemoteException e) {
+
+						}
+					}
 				}
-			}
+			}).start();
 		}
 	}
 

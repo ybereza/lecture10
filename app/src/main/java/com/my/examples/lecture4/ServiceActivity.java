@@ -48,8 +48,13 @@ public class ServiceActivity extends AppCompatActivity {
 
 	private class ServiceCallback extends ICallback.Stub {
 		@Override
-		public void onNewString(String data) throws RemoteException {
-			mTextView.setText(data);
+		public void onNewString(final String data) throws RemoteException {
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					mTextView.setText(data);
+				}
+			});
 		}
 	}
 
