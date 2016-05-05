@@ -38,8 +38,10 @@ public class WebViewActivity extends AppCompatActivity {
 
 		mWebView = (WebView)findViewById(R.id.webview);
 		mWebView.setWebViewClient(new MyWebViewClient());
+		mWebView.setInitialScale(1);
 		WebSettings settings = mWebView.getSettings();
 		settings.setSupportZoom(true);
+		settings.setUserAgentString("Lection10");
 		settings.setBuiltInZoomControls(true);
 		settings.setJavaScriptEnabled(true);
 		settings.setLoadWithOverviewMode(true);
